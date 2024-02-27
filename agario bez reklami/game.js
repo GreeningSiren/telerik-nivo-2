@@ -68,11 +68,13 @@ function draw() {
 
 }
 function mouseup() {
+    if(!areColliding(mouseX,mouseY,1,1,0,0,800,600)) {
     reklama.addEventListener('click', function() {
         console.log("reklama")
         var url = 'https://pepco.bg/';
         window.open(url, "_self");
     });
+    }
     // Pri klik s lqv buton - pokaji koordinatite na mishkata
     console.log("Mouse clicked at", mouseX, mouseY);
 }
