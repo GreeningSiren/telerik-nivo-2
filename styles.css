@@ -1,5 +1,13 @@
-body {
-    margin: 0;
-    /* background-color: aqua; */
+.foldersender {
+    padding:1em;
     text-align: center;
+    display:inline-block;
+    text-decoration: none !important;
+    margin:0 auto;
+    font-size: 200px;
 }
+
+.container{
+    width: 100%;
+    text-align: center;
+  }
