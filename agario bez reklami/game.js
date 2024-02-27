@@ -72,7 +72,7 @@ function mouseup() {
     reklama.addEventListener('click', function() {
         console.log("reklama")
         var url = 'https://pepco.bg/';
-        window.open(url, "_self");
+        window.open(url, "_blank");
     });
     }
     // Pri klik s lqv buton - pokaji koordinatite na mishkata
