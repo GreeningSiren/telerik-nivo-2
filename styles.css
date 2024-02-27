@@ -1,13 +1,13 @@
 .foldersender {
     padding:1em;
-    text-align: center;
-    display:inline-block;
+    text-align: left;
+    display:grid;
     text-decoration: none !important;
     margin:0 auto;
-    font-size: 200px;
+    /* font-size: ; */
 }
 
 .container{
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
