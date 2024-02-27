@@ -1,0 +1,150 @@
+let kufteX = [], kufteY = [], brKufteta = 0, kufteRazmer = 50;
+let igrachX = 0, igrachY = 0, myRazmer = 70;
+let mashtab = 1;
+let vragX = [], vragY = [], vragRazmer = [], brVragove = 0;
+let isGameOver = false;
+let mashtabMinimap = 0.05;
+for(let i = 0; i < 400; i++) {
+	kufteX[brKufteta] = randomInteger(4000);
+	kufteY[brKufteta] = randomInteger(4000);
+	brKufteta++;
+}
+for(let i = 0; i < 30; i++) {
+	vragX[i] = randomInteger(4000);
+	vragY[i] = randomInteger(4000);
+	vragRazmer[i] = randomInteger(100) + 20;
+	brVragove++;
+}
+function distance(x1,y1,x2,y2) {
+	return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+}
+function areCirclesColliding(cx1, cy1, cx2, cy2, sborRad) {
+	return (cx1-cx2)*(cx1-cx2) + (cy1-cy2)*(cy1-cy2) < sborRad*sborRad;
+}
+function update() {
+	if(isGameOver) {
+		return;
+	}
+	let d = distance(mouseX, mouseY, 400, 300);
+	igrachX = igrachX + 4 * (mouseX - 400) / d;
+	igrachY = igrachY + 4 * (mouseY - 300) / d;
+
+	if(igrachX < 0) {
+		igrachX = 0;
+	}
+	if(igrachX > 4000) {
+		igrachX = 4000;
+	}
+	if(igrachY < 0) {
+		igrachY = 0;
+	}
+	if(igrachY > 4000) {
+		igrachY = 4000;
+	}
+	for (let i = 0; i < brKufteta; i++) {
+		let sborRad = kufteRazmer/2 + myRazmer/2;
+		if (areCirclesColliding(kufteX[i], kufteY[i], igrachX, igrachY, sborRad)) {
+			kufteX[i] = Infinity;
+			myRazmer = myRazmer + 2;
+		}
+	}
+	if(isKeyPressed[81] && mashtab > 0.05){
+		mashtab = mashtab-0.01;
+	}
+	if (isKeyPressed[69] && mashtab < 3) {
+		mashtab = mashtab+0.01;
+	}
+	for(let i = 0; i < brVragove; i++) {
+		let d1 = distance(vragX[i], vragY[i], igrachX, igrachY);
+		if (d1 < 500) {
+			if (vragRazmer[i] > myRazmer) {
+				vragX[i] = vragX[i] + 3 * (igrachX - vragX[i]) / d1;
+				vragY[i] = vragY[i] + 3 * (igrachY - vragY[i]) / d1;
+			} else {
+				vragX[i] = vragX[i] - 3 * (igrachX - vragX[i]) / d1;
+				vragY[i] = vragY[i] - 3 * (igrachY - vragY[i]) / d1;
+			}
+		}
+		if(vragX[i] < 0) {
+			vragX[i] = 0;
+		}
+		if(vragX[i] > 4000) {
+			vragX[i] = 4000;
+		}
+		if (vragY[i] < 0) {
+			vragY[i] = 0;
+		}
+		if(vragY[i] > 4000) {
+			vragY[i] = 4000;
+		}
+		for(let j = 0; j < brKufteta; j++) {
+			let sborRad = kufteRazmer/2 + vragRazmer[i]/2;
+			if(areCirclesColliding(vragX[i], vragY[i], kufteX[j], kufteY[j], sborRad)) {
+				vragRazmer[j] += 1;
+				kufteX[j] = Infinity;
+			}
+		}
+		if(areCirclesColliding(igrachX, igrachY, vragX[i], vragY[i], myRazmer/2 + vragRazmer[i]/2)) {
+			if(vragRazmer[i] < myRazmer) {
+				vragX[i] = Infinity;
+				myRazmer += vragRazmer[i];
+			} else {
+				isGameOver = true;
+			}
+		}
+		for(let k = 0; k < brVragove; k++) {
+			if(i!= k && areCirclesColliding(vragX[i], vragY[i], vragX[k], vragY[k], vragRazmer[i]/2 + vragRazmer[k]/2)) {
+				if(vragRazmer[i] > vragRazmer[k]) {
+					vragX[k] = Infinity;
+					vragRazmer[i] += vragRazmer[k]/2;
+				} else {
+					vragX[i] = Infinity;
+					vragRazmer[k] += vragRazmer[i]/2;
+				}
+			}
+		}
+
+	}
+}
+function drawImageMashtab(risuvanaKartinka, risuvanX, risuvanY, risuvanRazmer) {
+	drawImage(risuvanaKartinka,
+		(risuvanX - igrachX - risuvanRazmer/2)*mashtab + 400,
+		(risuvanY - igrachY - risuvanRazmer/2)*mashtab + 300,
+		risuvanRazmer*mashtab,
+		risuvanRazmer*mashtab);
+}
+function drawMinimap() {
+	for(let i = 0; i < brKufteta; i++) {
+		drawImage(kufte,
+			600 + kufteX[i]*mashtabMinimap,
+			kufteY[i]*mashtabMinimap,
+			3,
+			3);
+	}
+	for (let i = 0; i < brVragove; i++) {
+		drawImage(sun,
+			600 + vragX[i]*mashtabMinimap,
+			vragY[i]*mashtabMinimap,
+			6,
+			6);
+	}
+	drawImage(ballOrTree,600 + igrachX*mashtabMinimap, igrachY*mashtabMinimap, 10, 10);
+	context.lineWidth = 5;
+	context.strokeRect(600, 0, 4000*mashtabMinimap, 4000*mashtabMinimap)
+}
+function draw() {
+	drawImageMashtab(ballOrTree, igrachX, igrachY, myRazmer);
+	for(let i = 0; i < brKufteta; i++) {
+		drawImageMashtab(kufte, kufteX[i], kufteY[i], kufteRazmer, kufteRazmer);
+	}
+	for(let i = 0; i < brVragove; i++) {
+		drawImageMashtab(sun, vragX[i], vragY[i], vragRazmer[i]);
+	}
+
+	drawMinimap();
+
+	context.font = "40px Courier New";
+	if(isGameOver) {
+		context.fillText("GAME OVER", 300, 300);
+	}
+}

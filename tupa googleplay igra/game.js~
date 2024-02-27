@@ -1,0 +1,40 @@
+// Suzdavame promenlivi
+let myX, myY;
+function init() {
+    // Kodut tuk se izpulnqva vednuj v nachaloto
+    myX = 300;
+    myY = 300;
+}
+function update() {
+    // Kodut tuk se izpulnqva (okolo) 100 puti v sekunda
+    myX = myX + (mouseX - myX) / 10;
+    myY = myY + (mouseY - myY) / 10;
+}
+
+function narisuvai4ugalnik(x1,y1,x2,y2,x3,y3,x4,y4) {
+    context.fillStyle = "orange"
+    context.beginPath()
+    context.moveTo(x1,y1)
+    context.lineTo(x2,y2)
+    context.lineTo(x3,y3)
+    context.lineTo(x4,y4)
+    context.fill()
+   
+    
+
+}
+function draw() {
+    // Tuk naprogramirai kakvo da se risuva
+    drawImage(backField, 0, 0, 800, 600);
+    drawImage(femaleAction, myX, myY, 60, 80);
+    narisuvai4ugalnik(200,150,550,150,700,420,100,420)
+}
+function mouseup() {
+    // Pri klik s lqv buton - pokaji koordinatite na mishkata
+    console.log("Mouse clicked at", mouseX, mouseY);
+}
+function keyup(key) {
+    // Pechatai koda na natisnatiq klavish
+    console.log("Pressed", key);
+}
+

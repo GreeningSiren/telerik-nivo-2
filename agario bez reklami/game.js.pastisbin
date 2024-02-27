@@ -1,0 +1,45 @@
+let myX, myY, myRazmer, kufteX, kufteY, kufteRazmer;
+let cameraX, cameraY;
+function init() {
+    cameraX = 0; cameraY = 0;
+    myX = 300;          myY = 300;
+    kufteX = [];        kufteY = [];
+    myRazmer = 70;      kufteRazmer = 60;
+    for(let i = 0; i < 1000; i++) {
+        kufteX[i] = randomInteger(3000);
+        kufteY[i] = randomInteger(3000);
+    }
+}
+function areCirclesColliding(x1,y1,r1,x2,y2,r2) {
+    let dx = x2-x1, dy = y2-y1;
+    if(Math.sqrt(dy*dy + dx*dx) < r1+r2) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function update() {
+    cameraX = myX*zoom - 400;
+    cameraY = myY*zoom - 300;
+    myX = myX - (400 - mouseX) / 10;
+    myY = myY - (300 - mouseY) / 10;
+    for(let i = 0; i < kufteY.length; i++){
+        if(areCirclesColliding(myX, myY, myRazmer/2,
+                            kufteX[i], kufteY[i], kufteRazmer/2)){
+            myRazmer += 1;
+            kufteX[i] = Infinity;
+        }
+    }
+}
+let zoom = 1;
+function drawCircleWithCamera(imekartinka, x, y, radius) {
+    drawImage(imekartinka, zoom*x - radius*zoom - cameraX, zoom*y - radius*zoom - cameraY, zoom*radius*2, zoom*radius*2);
+}
+function draw() {
+    drawCircleWithCamera(ballOrTree, myX, myY, myRazmer/2);
+    for(let i = 0; i < kufteX.length; i = i + 1) {
+        drawCircleWithCamera(kufte, kufteX[i], kufteY[i], kufteRazmer/2);
+    }
+}
+ 
+ 
