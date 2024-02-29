@@ -1,9 +1,10 @@
 .foldersender {
-    padding:1em;
+    padding:1.25em;
     text-align: left;
     display:grid;
     text-decoration: none;
-    margin:0 auto;
+    margin-left:2em;
+    margin-top: 0.5em;
     /* font-size: ; */
 }
 
