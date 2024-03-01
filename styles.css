@@ -12,3 +12,12 @@
     width: 45%;
     text-align: left; 
   }
+
+.adsbygoogle {
+    position: absolute;
+    height: 900px;
+    width: 900px;
+    margin-left: 35%;
+    /* top: 20em; */
+    text-align: right;
+}
