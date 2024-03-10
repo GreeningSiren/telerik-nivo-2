@@ -1,5 +1,5 @@
 // Suzdavame promenlivi
-let myX, myY, radius = 35, x1, x2, y1, y2, ugul = 5, br = 1, tx = [], ty = [], pt = [], y3 = 0, x3 = 0;
+let myX, myY, radius = 30, x1, x2, y1, y2, ugul = 5, br = 1, tx = [], ty = [], pt = [], y3 = 0, x3 = 0;
 let vragx = [], vragy = [], navragx, navragy, vragrgb = [], dx = [], dy = [];
 function init() {
     // Kodut tuk se izpulnqva vednuj v nachaloto
@@ -96,7 +96,7 @@ function draw() {
         context.beginPath();
         context.fillStyle = vragrgb[iv];
         context.lineWidth = 0;
-        context.arc(vragx[iv], vragy[iv], 15, 0, 2 * Math.PI);
+        context.arc(vragx[iv], vragy[iv], 20, 0, 2 * Math.PI);
         context.fill();
     }
     for (let i = 0; i < br; i++) {
@@ -110,7 +110,7 @@ function draw() {
     context.arc(myX, myY, radius, 0, 2 * Math.PI);
     context.fill();
     context.strokeStyle = "red";
-    context.lineWidth = 10;
+    context.lineWidth = 5;
     context.moveTo(myX, myY);
     context.lineTo(myX + (radius + 50) * Math.cos(ugul), myY + (radius + 50) * Math.sin(ugul));
     context.stroke();
