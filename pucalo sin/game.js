@@ -96,7 +96,7 @@ function draw() {
         context.beginPath();
         context.fillStyle = vragrgb[iv];
         context.lineWidth = 0;
-        context.arc(vragx[iv], vragy[iv], 20, 0, 2 * Math.PI);
+        context.arc(vragx[iv], vragy[iv], 30, 0, 2 * Math.PI);
         context.fill();
     }
     for (let i = 0; i < br; i++) {
