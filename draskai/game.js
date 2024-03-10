@@ -92,11 +92,13 @@ function draw() {
     context.fillStyle = "Black"
     context.fillRect(650, 200, 50, 50)
     context.font = "30px Tahoma"
-    context.fillText("PIXEL MOD" , 650,450)
+    context.fillText("PIXEL MOD" , 650,400)
     context.font = "30px Tahoma"
-    context.fillText("CIRCL MOD" , 647,500)
+    context.fillText("CIRCL MOD" , 647,450)
     context.font = "30px Tahoma"
-    context.fillText("LAIN MODe" , 647,550)
+    context.fillText("LAIN MODe" , 647,500)
+    context.font = "30px Tahoma"
+    context.fillText("Eraser" , 647,550)
  
     
   
@@ -119,14 +121,18 @@ function mouseup() {
     if (areColliding(mouseX, mouseY, 1, 1, 650, 200, 50, 50)) {
         SelectedColor = "Black"
     }
-    if (areColliding(mouseX, mouseY, 1, 1, 650, 450, 150, 20)) {
+    if (areColliding(mouseX, mouseY, 1, 1, 650, 400, 150, 20)) {
         drawMode = "pixel"
     }
-    if (areColliding(mouseX, mouseY, 1, 1, 647, 500, 150, 20)) {
+    if (areColliding(mouseX, mouseY, 1, 1, 647, 450, 150, 20)) {
         drawMode = "circle"
     }
-    if (areColliding(mouseX, mouseY, 1, 1, 647, 550, 150, 20)) {
+    if (areColliding(mouseX, mouseY, 1, 1, 647, 500, 150, 20)) {
         drawMode = "line"
+    }
+    if (areColliding(mouseX, mouseY, 1, 1, 647, 550, 150, 20)) {
+        SelectedColor = "White"
+        drawMode = "pixel"
     }
     let dx = mouseX - centurX
     let dy = mouseY - centurY
