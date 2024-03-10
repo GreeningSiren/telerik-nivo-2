@@ -9,14 +9,14 @@
 }
 
 .container{ 
-    width: 45%;
+    width: 35%;
     text-align: left; 
   }
 
 .adsbygoogle {
     position: absolute;
-    height: 900px;
-    width: 900px;
+    width: 950px;
+    height: 2000px;
     margin-left: 35%;
     /* top: 20em; */
     text-align: right;
