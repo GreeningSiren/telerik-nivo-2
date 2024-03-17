@@ -93,7 +93,7 @@ function update() {
 	updeit++
 	if (updeit % 30 == 0) {
 		for (let i = 0; i < brVragove; i++) {
-			console.log(vragX[i], vragY[i])
+			// console.log(vragX[i], vragY[i])
 			if (posoka[vragX[i]][vragY[i]] == 0) {
 				vragY[i] -= 1
 			} else if (posoka[vragX[i]][vragY[i]] == 1) {
