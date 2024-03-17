@@ -64,6 +64,16 @@ function makeDvumerenMasiv(rows, cols) {
 	}
 	return dvMasiv;
 }
+function makeDvumerenMasivOtMinusEdinici(rows, cols) {
+	let dvMasiv = [];
+	for (let i = 0; i < rows; i++) {
+		dvMasiv[i] = [];
+		for (let j = 0; j < cols; j++) {
+			dvMasiv[i][j] = -1;
+		}
+	}
+	return dvMasiv;
+}
 let brKletki = 20,
 	kletkaShir;
 let maze = generateMaze(brKletki - 2, brKletki - 2);
@@ -77,8 +87,11 @@ function init() {
 	updeit = 0
 }
 function update() {
+	if (updeit % 10 == 0 && granichniKoloni.length > 0) {
+		BFS_Step()
+	}
 	updeit++
-	if (updeit == 35) {
+	if (updeit % 30 == 0) {
 		for (let i = 0; i < brVragove; i++) {
 			console.log(vragX[i], vragY[i])
 			if (posoka[vragX[i]][vragY[i]] == 0) {
@@ -91,9 +104,7 @@ function update() {
 				vragX[i] -= 1
 			}
 		}
-		if(updeit >= 35) {
-			updeit = 0
-		}
+
 	}
 }
 function draw() {
@@ -102,22 +113,17 @@ function draw() {
 			if (maze[i][j] == 1) {
 				drawImage(box, i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
 			} else if (maze[i][j] == 3) {
-				drawImage(
-					cherry, i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
+				drawImage(cherry, i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
 			} else {
-				drawImage(
-					[arrowUp, arrowRight, arrowDown, arrowLeft][posoka[i][j]], i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
+				// drawImage(
+				// 	[arrowUp, arrowRight, arrowDown, arrowLeft][posoka[i][j]], i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
+				context.font = "15px Courier New";
+				context.fillText(razstoqnieDo[i][j], i * kletkaShir, j * kletkaShir);
 			}
 		}
 	}
 	for (let i = 0; i < brVragove; i++) {
-		drawImage(
-			zombie,
-			vragX[i] * kletkaShir,
-			vragY[i] * kletkaShir,
-			kletkaShir,
-			kletkaShir
-		);
+		drawImage(zombie, vragX[i] * kletkaShir, vragY[i] * kletkaShir, kletkaShir, kletkaShir);
 	}
 }
 function mouseup() {
@@ -131,6 +137,49 @@ function mouseup() {
 		}
 	}
 }
-function keyup(key) {
+let razstoqnieDo = makeDvumerenMasivOtMinusEdinici(brKletki, brKletki);
+// Избираме клетка с колона 1 и ред 1 като начална за BFS
+let granichniKoloni = [1];
+let granichniRedove = [1];
+razstoqnieDo[1][1] = 0;
 
+function BFS_Step() {
+	// Взимаме най-първата клетка от граничните и я махам
+	let tekKol = granichniKoloni.shift(),         // pop() за DFS
+		tekRed = granichniRedove.shift();         // pop() за DFS
+
+	// Ако  1. клетката нагоре от текущата не е обходена
+	//      2. клетката нагоре от текущата не е стена
+	if (razstoqnieDo[tekKol][tekRed - 1] < 0 && maze[tekKol][tekRed - 1] == 0) {
+		// Обхождам клетката нагоре от текущата
+
+		// Добавям горната клетка към граничните клетки
+		granichniKoloni.push(tekKol);
+		granichniRedove.push(tekRed - 1);
+
+		// Смятам разстоянието до горната клетка
+		razstoqnieDo[tekKol][tekRed - 1] = razstoqnieDo[tekKol][tekRed] + 1;
+	}
+	// Ако  1. клетката надолу от текущата не е обходена
+	//      2. клетката надолу от текущата не е стена
+	if (razstoqnieDo[tekKol][tekRed + 1] < 0 && maze[tekKol][tekRed + 1] == 0) {
+		// Обхождам клетката надолу от текущата
+
+		// Добавям долната клетка към граничните клетки
+		granichniKoloni.push(tekKol);
+		granichniRedove.push(tekRed + 1);
+
+		// Смятам разстоянието до долната клетка
+		razstoqnieDo[tekKol][tekRed + 1] = razstoqnieDo[tekKol][tekRed] + 1;
+	}
+	if (razstoqnieDo[tekKol - 1][tekRed] < 0 && maze[tekKol - 1][tekRed] == 0) {
+		granichniKoloni.push(tekKol - 1);
+		granichniRedove.push(tekRed);
+		razstoqnieDo[tekKol - 1][tekRed] = razstoqnieDo[tekKol][tekRed] + 1;
+	}
+	if (razstoqnieDo[tekKol + 1][tekRed] < 0 && maze[tekKol + 1][tekRed] == 0) {
+		granichniKoloni.push(tekKol + 1);
+		granichniRedove.push(tekRed);
+		razstoqnieDo[tekKol + 1][tekRed] = razstoqnieDo[tekKol][tekRed] + 1;
+	}
 }
