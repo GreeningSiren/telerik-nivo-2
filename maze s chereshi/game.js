@@ -71,11 +71,31 @@ let posoka = makeDvumerenMasiv(brKletki, brKletki);
 
 function init() {
 	kletkaShir = canvas.height / brKletki;
-	brVragove = 3;
+	brVragove = 0;
 	vragX = [];
 	vragY = [];
+	updeit = 0
 }
-function update() { }
+function update() {
+	updeit++
+	if (updeit == 35) {
+		for (let i = 0; i < brVragove; i++) {
+			console.log(vragX[i], vragY[i])
+			if (posoka[vragX[i]][vragY[i]] == 0) {
+				vragY[i] -= 1
+			} else if (posoka[vragX[i]][vragY[i]] == 1) {
+				vragX[i] += 1
+			} else if (posoka[vragX[i]][vragY[i]] == 2) {
+				vragY[i] += 1
+			} else if (posoka[vragX[i]][vragY[i]] == 3) {
+				vragX[i] -= 1
+			}
+		}
+		if(updeit >= 35) {
+			updeit = 0
+		}
+	}
+}
 function draw() {
 	for (let i = 0; i < brKletki; i++) {
 		for (let j = 0; j < brKletki; j++) {
@@ -83,20 +103,10 @@ function draw() {
 				drawImage(box, i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
 			} else if (maze[i][j] == 3) {
 				drawImage(
-					cherry,
-					i * kletkaShir,
-					j * kletkaShir,
-					kletkaShir,
-					kletkaShir
-				);
+					cherry, i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
 			} else {
 				drawImage(
-					[arrowUp, arrowRight, arrowDown, arrowLeft][posoka[i][j]],
-					i * kletkaShir,
-					j * kletkaShir,
-					kletkaShir,
-					kletkaShir
-				);
+					[arrowUp, arrowRight, arrowDown, arrowLeft][posoka[i][j]], i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
 			}
 		}
 	}
@@ -111,10 +121,16 @@ function draw() {
 	}
 }
 function mouseup() {
-	let kliknataKolona = Math.floor(mouseX / kletkaShir),
-	kliknatRed = Math.floor(mouseY / kletkaShir);
-	vragX.push(kliknataKolona)
-	vragY.push(kliknatRed)
-	// brVragove++
+	if (areColliding(mouseX, mouseY, 1, 1, 0, 0, 600, 600)) {
+		if (maze[Math.floor(mouseX / kletkaShir)][Math.floor(mouseY / kletkaShir)] != 1) {
+			let kliknataKolona = Math.floor(mouseX / kletkaShir),
+				kliknatRed = Math.floor(mouseY / kletkaShir);
+			vragX.push(kliknataKolona)
+			vragY.push(kliknatRed)
+			brVragove++
+		}
+	}
 }
-function keyup(key) { }
+function keyup(key) {
+
+}
