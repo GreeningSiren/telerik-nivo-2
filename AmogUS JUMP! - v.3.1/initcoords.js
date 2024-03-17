@@ -32,6 +32,7 @@ function initcoords(level) {
         dX = 0
         myX = 29.5
         myY = 520
+        resetboxes()
         kaduramog = 1
         brKotii = 5
         kotiqX[0] = 188
@@ -55,6 +56,7 @@ function initcoords(level) {
         dX = 0
         myX = 240
         myY = 520
+        resetboxes()
         kaduramog = 1
         brKotii = 5
         kotiqX[0] = 300

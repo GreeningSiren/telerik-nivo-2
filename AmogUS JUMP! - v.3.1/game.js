@@ -159,6 +159,7 @@ function draw() {
         context.font = "50px Tahoma"
         context.fillStyle = "White"
         nextlvl = level + 0.5
+        resetboxes()
         context.fillText("Level " + nextlvl, 240, 200)
         lk++
         if (lk > 7) {
