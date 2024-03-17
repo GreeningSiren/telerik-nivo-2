@@ -1,0 +1,12 @@
+move trigger
+indeksa e sushtiq kato platformata koqto shte mesti 
+
+kogato interract : 
+	skokX = moveplaceX
+	i Y
+
+v initcoords :
+	moveTriggerX[324234]  = kordi   i Y
+	moveplaceX i Y = kordi za mestene na skokche
+
+GOTOFO
