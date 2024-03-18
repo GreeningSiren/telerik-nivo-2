@@ -82,12 +82,12 @@ function writeText(font, style, text, x, y) {
     context.fillText(text, x, y)
 }
 function getTimeSigma() {
-    return (currentTime.getTime() - startTime.getTime())/1000
+    return (currentTime.getTime() - startTime.getTime()) / 1000
 }
 function writeTimer() {
     context.font = "20px Tahoma"
     context.fontStyle = "White"
-    context.fillText((getTimeSigma()), 630, 0)
+    context.fillText((getTimeSigma()), 0, 0)
 }
 function update() {
     // Kodut tuk se izpulnqva (okolo) 100 puti v sekunda
@@ -173,6 +173,7 @@ function draw() {
     if (level - prevlvl == 0.5 && level != 8.5) { // 
         // console.log("NIIVO 1")
         // context.drawImage(loading,650,480,100,100)
+        // writeTimer()
         context.font = "50px Tahoma"
         context.fillStyle = "White"
         nextlvl = level + 0.5
@@ -192,6 +193,7 @@ function draw() {
             nextlvl = level + 0.5
             // console.log("level + 0.5 kum 1")
         }
+        writeTimer()
 
     }
     if (level == 8.5) { // Posledno Nivo
@@ -207,8 +209,8 @@ function draw() {
             writeText("40px Tahoma", "Cyan", "Going for Any%?", 255, 350)
         }
         writeText("30px Tahoma", "Red", "Kolio 4ao", 460, 500)
-        writeText("30px Tahoma", "White", "Time: ", 150,45)
-        writeText("30px Tahoma", "White", getTimeSigma(),230,45)
+        writeText("30px Tahoma", "White", "Time: ", 150, 45)
+        writeText("30px Tahoma", "White", getTimeSigma(), 230, 45)
 
     }
     if (level % 1 == 0) {  // Ako nivo e 1,2,3...
@@ -285,13 +287,13 @@ function draw() {
             writeText("30px Tahoma", "white", "There's a SECRET Coin", 430, 440)
             writeText("30px Tahoma", "white", "hidden above the level", 430, 470)
         }
-        writeText("30px Tahoma", "white", "Placeholder", -100,-100)
+        writeText("30px Tahoma", "white", "Placeholder", -100, -100)
         if (level != 0) {
             writeTimer()
         }
     }
     if (level - prevlvl != 0.5) { // Ako nivo e 0.5,1.5,2.5...
-            drawImage(fireinthehole, celX, celY, 60, 60)
+        drawImage(fireinthehole, celX, celY, 60, 60)
         for (let i = 0; i < brSkokPlati; i++) {
             drawImage(powerupBlue, jumpPadX[i], jumpPadY[i], 50, 50)
             drawImage(moveTrigger, moveTriggerX[i], moveTriggerY[i], 50, 50)
