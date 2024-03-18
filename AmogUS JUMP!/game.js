@@ -43,6 +43,10 @@ function init() {
         coinCollected[i] = false
     }
 
+    // startTime = new Date()
+    currentTime = new Date()
+    isActiveTimer = false
+
     // pratiloadupt500 = false
     // loading.src = "loading.gif"
 }
@@ -55,20 +59,20 @@ function naZemqtaLiSum(Y) {
 }
 function coinoutof() {
     coincollect = 0
-    if(coinCollected[0] == true) {
-        coincollect ++
+    if (coinCollected[0] == true) {
+        coincollect++
     }
-    if(coinCollected[1] == true) {
-        coincollect ++
+    if (coinCollected[1] == true) {
+        coincollect++
     }
-    if(coinCollected[2] == true) {
-        coincollect ++
+    if (coinCollected[2] == true) {
+        coincollect++
     }
-    if(coinCollected[3] == true) {
-        coincollect ++
+    if (coinCollected[3] == true) {
+        coincollect++
     }
-    if(coinCollected[4] == true) {
-        coincollect ++
+    if (coinCollected[4] == true) {
+        coincollect++
     }
     return coincollect
 }
@@ -76,6 +80,14 @@ function writeText(font, style, text, x, y) {
     context.font = font
     context.fillStyle = style
     context.fillText(text, x, y)
+}
+function getTimeSigma() {
+    return (currentTime.getTime() - startTime.getTime())/1000
+}
+function writeTimer() {
+    context.font = "20px Tahoma"
+    context.fontStyle = "White"
+    context.fillText((getTimeSigma()), 630, 0)
 }
 function update() {
     // Kodut tuk se izpulnqva (okolo) 100 puti v sekunda
@@ -130,7 +142,12 @@ function update() {
     if (myX > 800 - 60) {
         myX = 800 - 60
     }
+
+    if (isActiveTimer) {
+        currentTime = new Date()
+    }
 }
+
 function draw() {
     // Tuk naprogramirai kakvo da se risuva
     context.fillStyle = "Black"
@@ -143,7 +160,7 @@ function draw() {
         context.fillText("Kolito Predstavq", 70, 120)
         context.font = "70px Comic Sans"
         context.fillStyle = "Red"
-        context.fillText("AmonUS JUMP!", 50, 230)
+        context.fillText("AmogUS JUMP!", 50, 230)
         drawImage(jelly[4], 310, 600 - 10, 100, 10)
         drawImage(pngegg, 590, 20, 170, 150)
         context.font = "27px Tahoma"
@@ -153,7 +170,7 @@ function draw() {
         context.fillText("Jump", 640, 300)
         context.fillText("Press E to interact", 250, 563)
     }
-    if (level - prevlvl == 0.5 && level != 8.5) {
+    if (level - prevlvl == 0.5 && level != 8.5) { // 
         // console.log("NIIVO 1")
         // context.drawImage(loading,650,480,100,100)
         context.font = "50px Tahoma"
@@ -177,18 +194,24 @@ function draw() {
         }
 
     }
-    if(level == 8.5) {
+    if (level == 8.5) { // Posledno Nivo
         // coinoutof()
-
+        isActiveTimer = false
+        // writeTimer()
         writeText("30px Tahoma", "White", "Congrats! You completed the game!", 170, 150)
-        writeText("40px Tahoma", "Yellow", coinoutof() + "/5 SPECIAL coins collected" , 150, 280)
-        if(coincollect>=5 ) {
-            writeText("40px Tahoma", "rgb(202, 162, 253)", "ALL SPECIAL COINS!",165,320)
+        writeText("40px Tahoma", "Yellow", coinoutof() + "/5 SPECIAL coins collected", 150, 280)
+        if (coincollect >= 5) {
+            writeText("40px Tahoma", "rgb(202, 162, 253)", "ALL SPECIAL COINS!", 165, 320)
         }
-        writeText("30px Tahoma", "Red", "Kolio 4ao", 460,500)
-        
+        if (coincollect == 0) {
+            writeText("40px Tahoma", "Cyan", "Going for Any%?", 255, 350)
+        }
+        writeText("30px Tahoma", "Red", "Kolio 4ao", 460, 500)
+        writeText("30px Tahoma", "White", "Time: ", 150,45)
+        writeText("30px Tahoma", "White", getTimeSigma(),230,45)
+
     }
-    if (level % 1 == 0) {
+    if (level % 1 == 0) {  // Ako nivo e 1,2,3...
         for (i = 0; i < brKotii; i++) {
             drawImage(box, kotiqX[i], kotiqY[i], 100, 50)
         }
@@ -219,7 +242,7 @@ function draw() {
                 dY = strelSila
                 console.log("hvruk")
             }
-            if(areColliding(myX,myY,60,80,moveTriggerX[i],moveTriggerY[i],50,50) && isKeyPressed[69]) {
+            if (areColliding(myX, myY, 60, 80, moveTriggerX[i], moveTriggerY[i], 50, 50) && isKeyPressed[69]) {
                 jumpPadX[i] = moveplaceX[i]
                 jumpPadY[i] = moveplaceY[i]
             }
@@ -237,37 +260,41 @@ function draw() {
 
         if (level == 2) {
             // if (coinCollected[0] == false) {
-                writeText("25px Tahoma", "white", "This is a SPECIAL Coin!", 70, 145)
-                writeText("25px Tahoma", "white", "Make sure to collect it", 70, 175)
+            writeText("25px Tahoma", "white", "This is a SPECIAL Coin!", 70, 145)
+            writeText("25px Tahoma", "white", "Make sure to collect it", 70, 175)
             // }
         }
-        if(level == 1) {
+        if (level == 1) {
             writeText("25px Tahoma", "White", "Interact with the weird green guy", 385, 50)
             writeText("25px Tahoma", "White", "to go to the next level", 385, 75)
         }
-        if(level == 4) {
-            writeText("30px Tahoma", "white", "Interact with a 'Jump Pad'", 400,435)
-            writeText("30px Tahoma", "white", "to get thrown in the air", 475,465)
+        if (level == 4) {
+            writeText("30px Tahoma", "white", "Interact with a 'Jump Pad'", 400, 435)
+            writeText("30px Tahoma", "white", "to get thrown in the air", 475, 465)
 
         }
-        if(level == 6) {
-            writeText("30px Tahoma", "white", "Press 'R'", 460,90)
-            writeText("30px Tahoma", "white", "to reset the level",460,120)
+        if (level == 6) {
+            writeText("30px Tahoma", "white", "Press 'R'", 460, 90)
+            writeText("30px Tahoma", "white", "to reset the level", 460, 120)
         }
-        if(level == 7) {
-            writeText("30px Tahoma", "white", "Interact with the 'Move Trigger'", 40,50)
-            writeText("30px Tahoma", "white", "to move its connected 'Jump Pad'", 40,80)
+        if (level == 7) {
+            writeText("30px Tahoma", "white", "Interact with the 'Move Trigger'", 40, 50)
+            writeText("30px Tahoma", "white", "to move its connected 'Jump Pad'", 40, 80)
         }
-        if(level == 8) {
-            writeText("30px Tahoma", "white", "There's a SECRET Coin", 430,440)
-            writeText("30px Tahoma", "white", "hidden above the level",430,470)
+        if (level == 8) {
+            writeText("30px Tahoma", "white", "There's a SECRET Coin", 430, 440)
+            writeText("30px Tahoma", "white", "hidden above the level", 430, 470)
+        }
+        writeText("30px Tahoma", "white", "Placeholder", -100,-100)
+        if (level != 0) {
+            writeTimer()
         }
     }
-    if (level - prevlvl != 0.5) {
-        drawImage(fireinthehole, celX, celY, 60, 60)
+    if (level - prevlvl != 0.5) { // Ako nivo e 0.5,1.5,2.5...
+            drawImage(fireinthehole, celX, celY, 60, 60)
         for (let i = 0; i < brSkokPlati; i++) {
             drawImage(powerupBlue, jumpPadX[i], jumpPadY[i], 50, 50)
-            drawImage(moveTrigger,moveTriggerX[i],moveTriggerY[i],50,50)
+            drawImage(moveTrigger, moveTriggerX[i], moveTriggerY[i], 50, 50)
         }
         drawImage(femaleAction[kaduramog], myX, myY, 60, 80);
     }
@@ -323,13 +350,15 @@ function keyup(key) {
         startsfx.play()
         level = 0.5
         loadupt = 100
+        startTime = new Date()
+        isActiveTimer = true
         // brKotii = 3
     }
     //     if(key == 83) {
     //         dy=100
     //         console.log("i")
     //     }
-    if(key == 82 && level - prevlvl != 0.5) {
+    if (key == 82 && level - prevlvl != 0.5) {
         initcoords(level)
     }
 }
