@@ -86,7 +86,7 @@ function getTimeSigma() {
 }
 function writeTimer() {
     context.font = "20px Tahoma"
-    context.fontStyle = "White"
+    context.fillStyle = "White"
     context.fillText((getTimeSigma()), 0, 0)
 }
 function update() {
