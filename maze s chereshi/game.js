@@ -85,13 +85,40 @@ function init() {
 	vragX = [];
 	vragY = [];
 	updeit = 0
+	// BFS_Step() 
+	// Напълва растояниеДо с числа :) //
+	while (granichniKoloni.length > 0) {
+		BFS_Step();
+		// updateStrelki();
+	}
+	updateStrelki();
+	posoka[1][1]= -1
+}
+
+function updateStrelki() {
+    for (let i = 0; i < brKletki; i++) {
+        for (let j = 0; j < brKletki; j++) {
+            if (maze[i][j] == 0 /*&& razstoqnieDo[i][j] != -1*/) {
+                // console.log("vlqzoh v na majkati updeutStrekjute")
+                if (razstoqnieDo[i][j + 1] + 1  == razstoqnieDo[i][j]) {
+                    // console.log("promenih ", posoka[i][j]);
+                    // console.log(razstoqnieDo[i][j])
+                    posoka[i][j] = 2;
+                    // console.log("na ", posoka[i][j]);
+                } else if (razstoqnieDo[i - 1][j] + 1  == razstoqnieDo[i][j]) {
+                    posoka[i][j] = 3;
+                } else if (razstoqnieDo[i][j - 1] + 1 == razstoqnieDo[i][j]) {
+                    posoka[i][j] = 0;
+                } else if (razstoqnieDo[i + 1][j] + 1  == razstoqnieDo[i][j]) {
+                    posoka[i][j] = 1;
+                }
+            }
+        }
+    }
 }
 function update() {
-	if (updeit % 10 == 0 && granichniKoloni.length > 0) {
-		BFS_Step()
-	}
 	updeit++
-	if (updeit % 30 == 0) {
+	if (updeit % 50 == 0) {
 		for (let i = 0; i < brVragove; i++) {
 			// console.log(vragX[i], vragY[i])
 			if (posoka[vragX[i]][vragY[i]] == 0) {
@@ -115,8 +142,7 @@ function draw() {
 			} else if (maze[i][j] == 3) {
 				drawImage(cherry, i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
 			} else {
-				// drawImage(
-				// 	[arrowUp, arrowRight, arrowDown, arrowLeft][posoka[i][j]], i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
+				drawImage([arrowUp, arrowRight, arrowDown, arrowLeft][posoka[i][j]], i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
 				context.font = "15px Courier New";
 				context.fillText(razstoqnieDo[i][j], i * kletkaShir, j * kletkaShir);
 			}
