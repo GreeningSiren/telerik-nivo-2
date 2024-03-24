@@ -143,8 +143,8 @@ function draw() {
 				drawImage(cherry, i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
 			} else {
 				drawImage([arrowUp, arrowRight, arrowDown, arrowLeft][posoka[i][j]], i * kletkaShir, j * kletkaShir, kletkaShir, kletkaShir);
-				context.font = "15px Courier New";
-				context.fillText(razstoqnieDo[i][j], i * kletkaShir, j * kletkaShir);
+				// context.font = "15px Courier New";
+				// context.fillText(razstoqnieDo[i][j], i * kletkaShir, j * kletkaShir);
 			}
 		}
 	}
