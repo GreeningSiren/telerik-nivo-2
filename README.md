@@ -8,7 +8,3 @@
 ## **Линкове към други игри**
   - https://greeningsiren.itch.io
   - https://greeningsiren.free.bg
-
-
-
-###### Made with SIMGA VScode ;) 💚
