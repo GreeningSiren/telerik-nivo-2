@@ -85,6 +85,7 @@ function draw() {
 function mouseup() {
     // Pri klik s lqv buton - pokaji koordinatite na mishkata
     console.log("Mouse clicked at", mouseX, mouseY);
+    dvijaLiSe = true
 }
 function keyup(key) {
     // Pechatai koda na natisnatiq klavish
