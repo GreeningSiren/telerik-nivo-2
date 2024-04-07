@@ -76,7 +76,7 @@ function draw() {
     context.fillRect(0, 0, canvas.width, canvas.height);
     drawImage(ballOrTree, myX - myRaz, myY - myRaz, myRaz * 2, myRaz * 2);
     for (let i = 0; i < brPlaneti; i++) {
-        drawImage(ballOrTarget, cX[i] - radCen, cY[i] - radCen, radCen * 2, radCen * 2);
+        drawImage(planet[i], cX[i] - radCen, cY[i] - radCen, radCen * 2, radCen * 2);
     }
     context.fillStyle = "white"
     context.fillRect(cX[0], cY[0], 1, 1)
