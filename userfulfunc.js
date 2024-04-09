@@ -10,7 +10,7 @@ function areCirclesColliding(x1, y1, r1, x2, y2, r2) {
 function drawCircle(x, y, r, style) {
     context.fillStyle = style
     context.beginPath()
-    context.arc(x, y, r, 0, 2 * Math.PI,)
+    context.arc(x, y, r, 0, 2 * Math.PI)
     context.closePath()
     context.fill()
 }
