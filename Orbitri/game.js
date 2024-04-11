@@ -1,10 +1,11 @@
+planetImg  = []
+for (let i = 0; i < 12; i++) {
+    planetImg[i] = tryToLoad("planet[" + i + "]", "white")
+}
 let cX = [], cY = [], brPlaneti;
 let ugul, radius, myX, myY;
 let dvijaLiSe;
-let distance = 200;
-// for (let i = 0; i < 12; i++) {
-//     planet[i] = tryToLoad(planet[i], white)
-// }
+let distance = 250;
 function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -53,6 +54,7 @@ function update() {
             ip = i
             dvijaLiSe = false
             radius = 120
+            // ugul  = Math.atan2(cY[i]-myX,cX[i]-myY)
         }
     }
     myX = Math.cos(ugul) * radius + cX[ip]
@@ -76,7 +78,7 @@ function draw() {
     context.fillRect(0, 0, canvas.width, canvas.height);
     drawImage(ballOrTree, myX - myRaz, myY - myRaz, myRaz * 2, myRaz * 2);
     for (let i = 0; i < brPlaneti; i++) {
-        drawImage(planet[i], cX[i] - radCen, cY[i] - radCen, radCen * 2, radCen * 2);
+        drawImage(planetImg[i], cX[i] - radCen, cY[i] - radCen, radCen * 2, radCen * 2);
     }
     context.fillStyle = "white"
     context.fillRect(cX[0], cY[0], 1, 1)
