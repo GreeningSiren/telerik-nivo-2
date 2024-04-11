@@ -1,3 +1,4 @@
+//MARK: areCirclesColliding
 function areCirclesColliding(x1, y1, r1, x2, y2, r2) {
     let dx = x2 - x1, dy = y2 - y1;
     if (Math.sqrt(dy * dy + dx * dx) < r1 + r2) {
@@ -7,6 +8,8 @@ function areCirclesColliding(x1, y1, r1, x2, y2, r2) {
     }
 }
 
+
+//MARK: drawCircle
 function drawCircle(x, y, r, style) {
     context.fillStyle = style
     context.beginPath()
@@ -15,6 +18,8 @@ function drawCircle(x, y, r, style) {
     context.fill()
 }
 
+
+//MARK: makeDvumerMasiv
 function makeDvumerenMasiv(rows, cols) {
 	let dvMasiv = [];
 	for (let i = 0; i < rows; i++) {
@@ -26,6 +31,8 @@ function makeDvumerenMasiv(rows, cols) {
 	return dvMasiv;
 }
 
+
+//MARK: narisuv4ugalnik
 function narisuvai4ugalnik(x1, y1, x2, y2, x3, y3, x4, y4) {
     // context.fillStyle = "#f45f45"
     context.beginPath()
