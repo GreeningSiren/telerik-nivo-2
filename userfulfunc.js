@@ -1,11 +1,7 @@
 //MARK: areCirclesColliding
 function areCirclesColliding(x1, y1, r1, x2, y2, r2) {
     let dx = x2 - x1, dy = y2 - y1;
-    if (Math.sqrt(dy * dy + dx * dx) < r1 + r2) {
-        return true;
-    } else {
-        return false;
-    }
+    return Math.sqrt(dy * dy + dx * dx) < r1 + r2;
 }
 
 

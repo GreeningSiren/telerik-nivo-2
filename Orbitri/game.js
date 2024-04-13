@@ -1,4 +1,4 @@
-planetImg  = []
+planetImg = []
 for (let i = 0; i < 12; i++) {
     planetImg[i] = tryToLoad("planet[" + i + "]", "white")
 }
@@ -6,6 +6,7 @@ let cX = [], cY = [], brPlaneti;
 let ugul, radius, myX, myY;
 let dvijaLiSe;
 let distance = 250;
+
 function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -38,14 +39,12 @@ function init() {
     dvijaLiSe = false;
     ip = 0
 }
+
 function areCirclesColliding(x1, y1, r1, x2, y2, r2) {
     let dx = x2 - x1, dy = y2 - y1;
-    if (Math.sqrt(dy * dy + dx * dx) < r1 + r2) {
-        return true;
-    } else {
-        return false;
-    }
+    return Math.sqrt(dy * dy + dx * dx) < r1 + r2;
 }
+
 function update() {
     // Kodut tuk se izpulnqva (okolo) 100 puti v sekunda
     for (i = 0; i < brPlaneti; i++) {
@@ -65,6 +64,7 @@ function update() {
         ugul += 0.05;
     }
 }
+
 function drawCircle(x, y, r, style) {
     context.fillStyle = style
     context.beginPath()
@@ -72,6 +72,7 @@ function drawCircle(x, y, r, style) {
     context.closePath()
     context.fill()
 }
+
 function draw() {
     // Tuk naprogramirai kakvo da se risuva
     context.fillStyle = "black";
@@ -84,11 +85,13 @@ function draw() {
     context.fillRect(cX[0], cY[0], 1, 1)
     context.fillRect(cX[0] - radCen / 2, cY[0] - radCen / 2, 1, 1)
 }
+
 function mouseup() {
     // Pri klik s lqv buton - pokaji koordinatite na mishkata
     console.log("Mouse clicked at", mouseX, mouseY);
     dvijaLiSe = true
 }
+
 function keyup(key) {
     // Pechatai koda na natisnatiq klavish
     console.log("Pressed", key);
