@@ -4,19 +4,11 @@ let farX = 0, mediumX = 0, nearX = 0, groundX = 0, groundY = 500, groundHeight =
 let cloudsWidth = 600, cloudsHeight = 300;
 let treeWidth1 = 100, treeHeight1 = 200, treeWidth2 = 70, treeHeight2 = 300;
 let treeX1 = 0, treeY1 = groundY - treeHeight1 + 20, treeX2 = 0, treeY2 = groundY - treeHeight2;
+let myShir = 80, myVis = 150, myX = 100, myY = groundY - myVis, playerImg, dY = -10;
+let pX= [], pY= [], pShir = [], pVis = [], pKartinka = [];
+let isInAir = false
 
-function init() {
-    canvas.width = 600;
-    canvas.height = 600;
-    BGFar = tryToLoadWithFullPath("./background/far.png");
-    BGMedium = tryToLoadWithFullPath("./background/medium.png");
-    BGNear = tryToLoadWithFullPath("./background/near.png");
-
-    FGNear = tryToLoadWithFullPath("./foreground/near.png");
-    FGTree = tryToLoadWithFullPath("./props/tree.png");
-}
-
-function update() {
+function updateImages() {
     farX    = farX - 0.3;
     mediumX = mediumX - 0.8;
     nearX   = nearX - 1.3;
@@ -35,7 +27,7 @@ function update() {
         treeX2 = 0;
     }
 }
-function draw() {
+function drawBackground() {
     drawImage(BGFar, farX, 0, cloudsWidth + 1, cloudsHeight);
     drawImage(BGFar, farX + cloudsWidth, 0, cloudsWidth + 1, cloudsHeight);
 
@@ -57,4 +49,46 @@ function draw() {
     for(let i = 0; i < 20; i++) {
         drawImage(FGTree, treeX1 + i*canvas.width/8, treeY1, treeWidth1, treeHeight1);
     }
+}
+function init() {
+    canvas.width = 600;
+    canvas.height = 600;
+    BGFar = tryToLoadWithFullPath("./background/far.png");
+    BGMedium = tryToLoadWithFullPath("./background/medium.png");
+    BGNear = tryToLoadWithFullPath("./background/near.png");
+
+    FGNear = tryToLoadWithFullPath("./foreground/near.png");
+    FGTree = tryToLoadWithFullPath("./props/tree.png");
+
+    playerImg = tryToLoadWithFullPath("./props/playerImg.png")
+    pKartinka = tryToLoadWithFullPath("./props/playerImg.png")
+}
+
+function update() {
+    updateImages()
+    if(isInAir) {
+        myY += dY
+        dY++
+    }
+    if(areColliding(myX,myY,myShir,myVis,0,500,canvas.width,canvas.height)) {
+        isInAir = false
+        dY  = 0
+        myY = 350
+    }
+}
+function draw() {
+    drawBackground();
+    drawImage(playerImg,myX,myY,myShir,myVis)
+    drawImage(pKartinka,pX,pY,pShir,pVis)
+}
+function keydown(key) {
+    if(!isInAir && key === 32) {
+        isInAir = true;
+        dY = -20
+        myY = 350
+        // console.log("autifst")
+    }
+}
+function mouseup() {
+    console.log(mouseX, mouseY)
 }
