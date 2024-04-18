@@ -87,6 +87,9 @@ function keydown(key) {
         dY = -6.5
     }
 }
-// function mouseup() {
-//     console.log(mouseX, mouseY)
-// }
+function mouseup() {
+    if(!isInAir) {
+        isInAir = true;
+        dY = -6.5
+    }
+}
