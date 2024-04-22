@@ -80,7 +80,7 @@ function keyup(key) {
     // 4 - target
     // 5 - target i kotiq
     if (key === 87) {
-        if (maze[myY - 1][myX] === 0 || maze[myY - 1][myX] === 4 || maze[myY - 1][myX] === 5) {
+        if (maze[myY - 1][myX] === 0 || maze[myY - 1][myX] === 4) {
             myY--
         } else if (maze[myY - 1][myX] === 2) {
             if (maze[myY - 2][myX] === 0) {
@@ -98,7 +98,7 @@ function keyup(key) {
                 myY--
           }
     } else if (key === 68) {
-        if (maze[myY][myX + 1] === 0 || maze[myY][myX + 1] === 4 || maze[myY][myX + 1] === 5) {
+        if (maze[myY][myX + 1] === 0 || maze[myY][myX + 1] === 4) {
             myX++
         } else if (maze[myY][myX + 1] === 2) {
             if (maze[myY][myX + 2] === 0) {
