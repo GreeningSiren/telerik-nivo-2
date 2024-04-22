@@ -91,12 +91,12 @@ function keyup(key) {
                 maze[myY - 2][myX] = 5
                 maze[myY - 1][myX] = 0
                 myY--
-            } else if (maze[myY-2][myX] === 5) {
-                maze[myY - 2][myX] = 4
-                maze[myY-1][myX] = 5
-                myY--
             }
-        }
+        } else if (maze[myY-1][myX] === 5) {
+                maze[myY - 2][myX] = 2
+                maze[myY-1][myX] = 4
+                myY--
+          }
     } else if (key === 68) {
         if (maze[myY][myX + 1] === 0 || maze[myY][myX + 1] === 4 || maze[myY][myX + 1] === 5) {
             myX++
@@ -109,14 +109,14 @@ function keyup(key) {
                 maze[myY][myX + 2] = 5
                 maze[myY][myX + 1] = 0
                 myX++
-            } else if (maze[myY][myX+2] === 5) {
-                maze[myY][myX+2] = 4
-                maze[myY][myX+1] = 5
-                myY--
             }
-        }
+        } else if (maze[myY][myX+1] === 5) {
+                maze[myY][myX+2] = 2
+                maze[myY][myX+1] = 4
+                myY--
+          }
     } else if (key === 83) {
-        if (maze[myY + 1][myX] === 0 || maze[myY + 1][myX] === 4 || maze[myY + 1][myX] === 5) {
+        if (maze[myY + 1][myX] === 0 || maze[myY + 1][myX] === 4) {
             myY++
         } else if (maze[myY + 1][myX] === 2) {
             if (maze[myY + 2][myX] === 0) {
@@ -127,14 +127,14 @@ function keyup(key) {
                 maze[myY + 2][myX] = 5
                 maze[myY + 1][myX] = 0
                 myY++
-            } else if (maze[myY+2][myX] === 5) {
-                maze[myY + 2][myX] = 4
-                maze[myY+1][myX] = 5
-                myY--
             }
-        }
+        } else if (maze[myY+1][myX] === 5) {
+                maze[myY + 2][myX] = 2
+                maze[myY+1][myX] = 4
+                myY--
+         }
     } else if (key === 65) {
-        if (maze[myY][myX - 1] === 0 || maze[myY][myX - 1] === 4 || maze[myY][myX - 1] === 5) {
+        if (maze[myY][myX - 1] === 0 || maze[myY][myX - 1] === 4) {
             myX--
         } else if (maze[myY][myX - 1] === 2) {
             if (maze[myY][myX - 2] === 0) {
@@ -145,11 +145,11 @@ function keyup(key) {
                 maze[myY][myX - 2] = 5
                 maze[myY][myX - 1] = 0
                 myX--
-            } else if (maze[myY][myX-2] === 5) {
-                maze[myY][myX-2] = 4
-                maze[myY][myX-1] = 5
-                myY--
             }
+        } else if (maze[myY][myX-1] === 5) {
+             maze[myY][myX-1] = 4
+             maze[myY][myX-2] = 2
+              myY--
         }
     }
     // maze[myY][myX] = 3
