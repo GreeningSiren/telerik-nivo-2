@@ -61,7 +61,7 @@ function draw() {
 
 function mouseup() {}
 
-function keyup(key) {
+function keydown(key) {
     // Pechatai koda na natisnatiq klavish
     console.log("Pressed", key);
     // maze[myY][myX] = 0;
