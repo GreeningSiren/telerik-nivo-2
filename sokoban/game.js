@@ -107,7 +107,7 @@ function keydown(key) {
                 maze[myY - 2][myX] = 2;
                 maze[myY - 1][myX] = 4;
                 myY--;
-            }else if(maze[myY-2][myX] === 4) {
+            }else if(maze[myY-2][myX] === 4) { // ako e sledvashtoto e target pravi magii i mini ;)
                 maze[myY-2][myX] = 5;
                 maze[myY-1][myX] = 4;
                 myY--;
