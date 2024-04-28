@@ -40,3 +40,10 @@ function narisuvai4ugalnik(x1, y1, x2, y2, x3, y3, x4, y4) {
     context.closePath()
     context.fill()
 }
+
+//MARK: writeText
+function writeText(font, style, text, x, y) {
+    context.font = font
+    context.fillStyle = style
+    context.fillText(text, x, y)
+}
