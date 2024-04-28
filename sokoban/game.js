@@ -26,6 +26,24 @@ maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
+// maze = [
+//     // 0 - pod
+//     // 1 - stena
+//     // 2 - kotiq
+//     // 3 - player
+//     // 4 - target
+//     // 5 - target i kotiq
+//     [0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+//     [1, 1, 1, 0, 0, 0, 1, 0, 0, 0],
+//     [1, 4, 0, 2, 0, 0, 1, 0, 0, 0],
+//     [1, 1, 1, 0, 2, 4, 1, 0, 0, 0],
+//     [1, 4, 1, 1, 2, 0, 1, 0, 0, 0],
+//     [1, 0, 1, 4, 4, 4, 1, 1, 0, 0],
+//     [1, 2, 0, 5, 2, 2, 4, 1, 0, 0],
+//     [1, 0, 0, 4, 4, 4, 0, 1, 0, 0],
+//     [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// ];
 let target = tryToLoad("target", "red");
 let targetBox = tryToLoad("targetBox", "black");
 
@@ -89,6 +107,10 @@ function keydown(key) {
                 maze[myY - 2][myX] = 2;
                 maze[myY - 1][myX] = 4;
                 myY--;
+            }else if(maze[myY-2][myX] === 4) {
+                maze[myY-2][myX] = 5;
+                maze[myY-1][myX] = 4;
+                myY--;
             }
         }
     } else if (key === 68 || key === 39) {
@@ -108,6 +130,10 @@ function keydown(key) {
             if (maze[myY][myX + 2] === 0) {
                 maze[myY][myX + 2] = 2;
                 maze[myY][myX + 1] = 4;
+                myX++;
+            }else if(maze[myY][myX+2] === 4) {
+                maze[myY][myX+2] = 5;
+                maze[myY][myX+2] = 4;
                 myX++;
             }
         }
@@ -129,6 +155,10 @@ function keydown(key) {
                 maze[myY + 2][myX] = 2;
                 maze[myY + 1][myX] = 4;
                 myY++;
+            }else if(maze[myY+2][myX] === 4) {
+                maze[myY+2][myX] = 5;
+                maze[myY+1][myX] = 4;
+                myY++;
             }
         }
     } else if (key === 65 || key === 37) {
@@ -148,6 +178,10 @@ function keydown(key) {
             if (maze[myY][myX - 2] === 0) {
                 maze[myY][myX - 1] = 4;
                 maze[myY][myX - 2] = 2;
+                myX--;
+            }else if(maze[myY][myX-2] === 4) {
+                maze[myY][myX-2] = 5;
+                maze[myY][myX-1] = 4;
                 myX--;
             }
         }
