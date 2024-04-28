@@ -71,7 +71,7 @@ function keydown(key) {
     // 3 - player
     // 4 - target
     // 5 - target i kotiq
-    if (key === 87) {  // ako key e W
+    if (key === 87 || key === 38) {  // ako key e W
         if (maze[myY - 1][myX] === 0 || maze[myY - 1][myX] === 4) {  // mini prez tezi
             myY--;
         } else if (maze[myY - 1][myX] === 2) { // inache ako e kotiq, butni q
@@ -91,7 +91,7 @@ function keydown(key) {
                 myY--;
             }
         }
-    } else if (key === 68) {
+    } else if (key === 68 || key === 39) {
         if (maze[myY][myX + 1] === 0 || maze[myY][myX + 1] === 4) {
             myX++;
         } else if (maze[myY][myX + 1] === 2) {
@@ -111,7 +111,7 @@ function keydown(key) {
                 myX++;
             }
         }
-    } else if (key === 83) {
+    } else if (key === 83 || key === 40) {
         if (maze[myY + 1][myX] === 0 || maze[myY + 1][myX] === 4) {
             myY++;
         } else if (maze[myY + 1][myX] === 2) {
@@ -131,7 +131,7 @@ function keydown(key) {
                 myY++;
             }
         }
-    } else if (key === 65) {
+    } else if (key === 65 || key === 37) {
         if (maze[myY][myX - 1] === 0 || maze[myY][myX - 1] === 4) {
             myX--;
         } else if (maze[myY][myX - 1] === 2) {
