@@ -53,7 +53,8 @@ function init() {
     myY = 2;
 }
 
-function update() {}
+function update() {
+}
 
 function draw() {
     // Tuk naprogramirai kakvo da se risuva
@@ -77,7 +78,8 @@ function draw() {
     drawImage(femaleAction, myX * 50, myY * 50, 50, 50);
 }
 
-function mouseup() {}
+function mouseup() {
+}
 
 function keydown(key) {
     // Pechatai koda na natisnatiq klavish
@@ -89,103 +91,69 @@ function keydown(key) {
     // 3 - player
     // 4 - target
     // 5 - target i kotiq
+    let dX = 0;
+    let dY = 0;
     if (key === 87 || key === 38) {  // ako key e W
-        if (maze[myY - 1][myX] === 0 || maze[myY - 1][myX] === 4) {  // mini prez tezi
-            myY--;
-        } else if (maze[myY - 1][myX] === 2) { // inache ako e kotiq, butni q
-            if (maze[myY - 2][myX] === 0) { // ako sled tova e pod davaj
-                maze[myY - 2][myX] = 2;
-                maze[myY - 1][myX] = 0;
-                myY--;
-            } else if (maze[myY - 2][myX] === 4) { // inache ako sled tova e target davaj i stani target i kotiq
-                maze[myY - 2][myX] = 5;
-                maze[myY - 1][myX] = 0;
-                myY--;
-            }
-        } else if (maze[myY - 1][myX] === 5) { // ako e target i kotiq butni
-            if (maze[myY - 2][myX] === 0) { // ako sledvashtoto e pod mini
-                maze[myY - 2][myX] = 2;
-                maze[myY - 1][myX] = 4;
-                myY--;
-            }else if(maze[myY-2][myX] === 4) { // ako e sledvashtoto e target pravi magii i mini ;)
-                maze[myY-2][myX] = 5;
-                maze[myY-1][myX] = 4;
-                myY--;
-            }
-        }
-    } else if (key === 68 || key === 39) {
-        if (maze[myY][myX + 1] === 0 || maze[myY][myX + 1] === 4) {
-            myX++;
-        } else if (maze[myY][myX + 1] === 2) {
-            if (maze[myY][myX + 2] === 0) {
-                maze[myY][myX + 2] = 2;
-                maze[myY][myX + 1] = 0;
-                myX++;
-            } else if (maze[myY][myX + 2] === 4) {
-                maze[myY][myX + 2] = 5;
-                maze[myY][myX + 1] = 0;
-                myX++;
-            }
-        } else if (maze[myY][myX + 1] === 5) {
-            if (maze[myY][myX + 2] === 0) {
-                maze[myY][myX + 2] = 2;
-                maze[myY][myX + 1] = 4;
-                myX++;
-            }else if(maze[myY][myX+2] === 4) {
-                maze[myY][myX+2] = 5;
-                maze[myY][myX+2] = 4;
-                myX++;
-            }
-        }
-    } else if (key === 83 || key === 40) {
-        if (maze[myY + 1][myX] === 0 || maze[myY + 1][myX] === 4) {
-            myY++;
-        } else if (maze[myY + 1][myX] === 2) {
-            if (maze[myY + 2][myX] === 0) {
-                maze[myY + 2][myX] = 2;
-                maze[myY + 1][myX] = 0;
-                myY++;
-            } else if (maze[myY + 2][myX] === 4) {
-                maze[myY + 2][myX] = 5;
-                maze[myY + 1][myX] = 0;
-                myY++;
-            }
-        } else if (maze[myY + 1][myX] === 5) {
-            if (maze[myY + 2][myX] === 0) {
-                maze[myY + 2][myX] = 2;
-                maze[myY + 1][myX] = 4;
-                myY++;
-            }else if(maze[myY+2][myX] === 4) {
-                maze[myY+2][myX] = 5;
-                maze[myY+1][myX] = 4;
-                myY++;
-            }
-        }
-    } else if (key === 65 || key === 37) {
-        if (maze[myY][myX - 1] === 0 || maze[myY][myX - 1] === 4) {
-            myX--;
-        } else if (maze[myY][myX - 1] === 2) {
-            if (maze[myY][myX - 2] === 0) {
-                maze[myY][myX - 2] = 2;
-                maze[myY][myX - 1] = 0;
-                myX--;
-            } else if (maze[myY][myX - 2] === 4) {
-                maze[myY][myX - 2] = 5;
-                maze[myY][myX - 1] = 0;
-                myX--;
-            }
-        } else if (maze[myY][myX - 1] === 5) {
-            if (maze[myY][myX - 2] === 0) {
-                maze[myY][myX - 1] = 4;
-                maze[myY][myX - 2] = 2;
-                myX--;
-            }else if(maze[myY][myX-2] === 4) {
-                maze[myY][myX-2] = 5;
-                maze[myY][myX-1] = 4;
-                myX--;
-            }
-        }
+        dY = -1;
+
+    } else if (key === 68 || key === 39) { // ako key e D
+        dX = 1;
+    } else if (key === 83 || key === 40) { // ako key e S
+        dY = 1;
+    } else if (key === 65 || key === 37) { // ako key e A
+        dX = -1;
     }
-    // maze[myY][myX] = 3
+    // console.log(dY, dY)
+    if (maze[myY + dY][myX + dX] === 0 || maze[myY + dY][myX + dX] === 4) {  // mini prez tezi
+        myX += dX;
+        myY += dY;
+    } else if (maze[myY + dY][myX + dX] === 2) { // inache ako e kotiq, butni q
+        if (maze[myY + 2*dY][myX + 2*dX] === 0) { // ako sled tova e pod davaj
+            maze[myY + 2*dY][myX + 2*dX] = 2;
+            maze[myY + dY][myX + dX] = 0;
+            myX += dX;
+            myY += dY;
+        } else if (maze[myY + 2*dY][myX + 2*dX] === 4) { // inache ako sled tova e target davaj i stani target i kotiq
+            maze[myY + 2*dY][myX + 2*dX] = 5;
+            maze[myY + dY][myX + dX] = 0;
+            myX += dX;
+            myY += dY;
+        }
+    } else if (maze[myY + dY][myX + dX] === 5) { // ako e target i kotiq butni
+        if (maze[myY + 2*dY][myX + 2*dX] === 0) { // ako sledvashtoto e pod mini
+            maze[myY + 2*dY][myX + 2*dX] = 2;
+            maze[myY + dY][myX + dX] = 4;
+            myX += dX;
+            myY += dY;
+        } else if (maze[myY + 2*dY][myX + 2*dX] === 4) { // ako e sledvashtoto e target pravi magii i mini ;)
+            maze[myY + 2*dY][myX + 2*dX] = 5;
+            maze[myY + dY][myX + dX] = 4;
+            myX += dX;
+            myY += dY;
+        }
+        // maze[myY][myX] = 3
+    }
 }
 
+// if (maze[myY - 1][myX] === 0 || maze[myY - 1][myX] === 4) {  // mini prez tezi
+//     myY--;
+// } else if (maze[myY - 1][myX] === 2) { // inache ako e kotiq, butni q
+//     if (maze[myY - 2][myX] === 0) { // ako sled tova e pod davaj
+//         maze[myY - 2][myX] = 2;
+//         maze[myY - 1][myX] = 0;
+//         myY--;
+//     } else if (maze[myY - 2][myX] === 4) { // inache ako sled tova e target davaj i stani target i kotiq
+//         maze[myY - 2][myX] = 5;
+//         maze[myY - 1][myX] = 0;
+//         myY--;
+//     }
+// } else if (maze[myY - 1][myX] === 5) { // ako e target i kotiq butni
+//     if (maze[myY - 2][myX] === 0) { // ako sledvashtoto e pod mini
+//         maze[myY - 2][myX] = 2;
+//         maze[myY - 1][myX] = 4;
+//         myY--;
+//     } else if (maze[myY - 2][myX] === 4) { // ako e sledvashtoto e target pravi magii i mini ;)
+//         maze[myY - 2][myX] = 5;
+//         maze[myY - 1][myX] = 4;
+//         myY--;
+//     }
