@@ -1,0 +1,12 @@
+version = 1
+
+exclude_patterns = [
+  ".github/**",
+  "code.zip"
+]
+
+[[analyzers]]
+name = "javascript"
+
+  [analyzers.meta]
+  environment = ["browser"]
