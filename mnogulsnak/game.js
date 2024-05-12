@@ -30,7 +30,7 @@ function init() {
     myY = 300;
     radius = 25;
     x = radius;
-    y = canvas.height - radius;
+    y = canvas.height ;
 }
 
 function update() {
@@ -44,15 +44,19 @@ function draw() {
     // context.fillStyle = "black"
     // context.fillRect(0, 0, GRID_HEIGHT, GRID_WIDTH)
     for (let i = 0; i <30; i++) {
-        for (let j = 0; j < 20; j++) {
+        for (let j = 0; j < 30; j++) {
             let visochina = pythagorean(radius / 2, (Math.sqrt(3 / 4)* radius))
+            let a = y - visochina - (j * (visochina - 2) * 2) - (i * visochina);
+
             drawMnogougulnik(
                 (x + (3 / 2 * radius) *i),
-                j*(y - visochina+2*j*y),
+                (a),
                 radius, 6, "black")
             // x += (3 / 2 * radius);
             // console.log(x,y)
             // y -= Math.hypot( radius/2,Math.sqrt(3/4)*radius)
+            //console.log(a);
+            //console.log(y);
         }
     }
 }
