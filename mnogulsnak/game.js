@@ -11,6 +11,11 @@ function drawMnogougulnik(x, y, radius, brStrani, style = "Black") {
     // context.fill();
     context.stroke();
 }
+function pythagorean(sideA, sideB){
+    // Use the Pythagorean theorem to calculate the length of the hypotenuse.
+    // return Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2));
+    return Math.hypot(sideA,sideB)
+}
 
 // Suzdavame promenlivi
 let myX, myY;
@@ -40,13 +45,14 @@ function draw() {
     // context.fillRect(0, 0, GRID_HEIGHT, GRID_WIDTH)
     for (let i = 0; i <30; i++) {
         for (let j = 0; j < 20; j++) {
+            let visochina = pythagorean(radius / 2, (Math.sqrt(3 / 4)* radius))
             drawMnogougulnik(
                 (x + (3 / 2 * radius) *i),
-                j*(y - i*(Math.hypot(radius / 2, Math.sqrt(3 / 4)) * radius)),
+                j*(y - visochina+2*j*y),
                 radius, 6, "black")
             // x += (3 / 2 * radius);
-            // // console.log(x)
-            // y -= Math.hypot(radius/2,Math.sqrt(3/4)*radius)
+            // console.log(x,y)
+            // y -= Math.hypot( radius/2,Math.sqrt(3/4)*radius)
         }
     }
 }
