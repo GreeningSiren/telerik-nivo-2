@@ -29,7 +29,6 @@ function drawPlayer(x, y, radius, brStrani = 6, style = "White") {
 // Suzdavame promenlivi
 let radius = 12;
 let myX = 0, myY = radius;
-endlessCanvas = true;
 const GRID_HEIGHT = window.innerHeight
 const GRID_WIDTH = window.innerWidth
 let x, y;
