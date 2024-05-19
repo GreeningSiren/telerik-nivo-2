@@ -11,7 +11,7 @@ function drawMnogougulnik(x, y, radius, brStrani, style = "White") {
     context.stroke();
 }
 
-function drawPlayer(x, y, radius, brStrani = 6, style = "White") {
+function drawZapulnenMnogougulnik(x, y, radius, brStrani = 6, style = "White") {
     let ugul = 0
     context.strokeStyle = style
     context.fillStyle = style
@@ -38,7 +38,7 @@ let posoka = 0
 let brUpdates = 0
 let opashkaX = [], opashkaY =[];
 let razmer = 5
-
+let qbulkaX = randomInteger(30), qbulkaY = randomInteger(30);
 function nadqsnoX(gridX) {
     return gridX * 1.5 * radius;
 }
@@ -68,7 +68,7 @@ function update() {
         if (isKeyPressed[87]) {
             opashkaX.push(myX)
             opashkaY.push(myY)
-            if(opashkaX.length>5) {
+            if(opashkaX.length>razmer) {
                 opashkaX.shift()
                 opashkaY.shift()
             }
@@ -101,6 +101,11 @@ function update() {
             posoka = 5;
         }
     }
+    if(qbulkaX === myX && qbulkaY === myY) {
+        qbulkaX = randomInteger(30)
+        qbulkaY = randomInteger(30)
+        razmer++
+    }
 }
 
 function draw() {
@@ -116,9 +121,10 @@ function draw() {
         }
     }
     for(let n=0;n<opashkaX.length;n++) {
-        drawPlayer(radius + nadqsnoX(opashkaX[n]) + nadoluX(opashkaY[n]), radius + nadqsnoY(opashkaX[n]) + nadoluY(opashkaY[n]) + 127, radius,6, "gold")
+        drawZapulnenMnogougulnik(radius + nadqsnoX(opashkaX[n]) + nadoluX(opashkaY[n]), radius + nadqsnoY(opashkaX[n]) + nadoluY(opashkaY[n]) + 127, radius,6, "gold")
     }
-    drawPlayer(radius+nadqsnoX(myX) + nadoluX(myY), radius + nadqsnoY(myX) + nadoluY(myY) + 127, radius, 6, "#2574a9")
+    drawZapulnenMnogougulnik(radius+nadqsnoX(myX) + nadoluX(myY), radius + nadqsnoY(myX) + nadoluY(myY) + 127, radius, 6, "#2574a9")
+    drawZapulnenMnogougulnik(radius+nadqsnoX(qbulkaX) + nadoluX(qbulkaY), radius + nadqsnoY(qbulkaX) + nadoluY(qbulkaY)+127,radius,6,"red")
 }
 
 function mouseup() {
