@@ -13,6 +13,7 @@ function drawMnogougulnik(x, y, radius, brStrani, style = "White") {
 
 function drawPlayer(x, y, radius, brStrani = 6, style = "White") {
     let ugul = 0
+    context.strokeStyle = style
     context.fillStyle = style
     context.lineWidth = 1;
     context.beginPath()
@@ -21,6 +22,7 @@ function drawPlayer(x, y, radius, brStrani = 6, style = "White") {
         ugul += 2 * Math.PI / brStrani
         context.lineTo(x + (Math.cos(ugul) * radius), y + (Math.sin(ugul) * radius))
     }
+    // context.stroke()
     context.fill();
 }
 
@@ -34,6 +36,8 @@ let x, y;
 let visochina = (Math.sqrt(3 / 4) * radius);
 let posoka = 0
 let brUpdates = 0
+let opashkaX = [], opashkaY =[];
+let razmer = 5
 
 function nadqsnoX(gridX) {
     return gridX * 1.5 * radius;
@@ -62,6 +66,12 @@ function update() {
     brUpdates++;
     if (brUpdates % 10 === 0) {
         if (isKeyPressed[87]) {
+            opashkaX.push(myX)
+            opashkaY.push(myY)
+            if(opashkaX.length>5) {
+                opashkaX.shift()
+                opashkaY.shift()
+            }
             if (posoka === 0) {
                 myX++;
             } else if (posoka === 1) {
@@ -104,6 +114,9 @@ function draw() {
                 radius + nadqsnoX(i) + nadoluX(j), radius + nadqsnoY(i) + nadoluY(j) + 127,
                 radius, 6, "#f4f4f4")
         }
+    }
+    for(let n=0;n<opashkaX.length;n++) {
+        drawPlayer(radius + nadqsnoX(opashkaX[n]) + nadoluX(opashkaY[n]), radius + nadqsnoY(opashkaX[n]) + nadoluY(opashkaY[n]) + 127, radius,6, "gold")
     }
     drawPlayer(radius+nadqsnoX(myX) + nadoluX(myY), radius + nadqsnoY(myX) + nadoluY(myY) + 127, radius, 6, "#2574a9")
 }
