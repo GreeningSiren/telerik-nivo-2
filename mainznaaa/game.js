@@ -93,14 +93,10 @@ function mouseup() {
                 otvoreno[kolona][red] = true;
                 otvoreno[kolona + 1][red] = true;
                 otvoreno[kolona - 1][red] = true;
+                otvoreno[kolona + 1][red + 1] = true;
+                otvoreno[kolona + 1][red - 1] = true;
                 otvoreno[kolona][red + 1] = true;
                 otvoreno[kolona][red - 1] = true;
-                otvoreno[kolona ][red + 2] = true;
-                otvoreno[kolona][red - 2] = true;
-                otvoreno[kolona - 1][red + 2] = true;
-                otvoreno[kolona - 1][red - 2] = true;
-
-
             }
         }
     }
