@@ -37,12 +37,12 @@ function draw() {
         for (let red = 0; red < 10; red++) {
             if (otvoreno[kolona][red]) {
                 if (mini[kolona][red]) {
-                    context.fillStyle = "#FF0000";
+                    context.fillStyle = "#F00";
                 } else {
-                    context.fillStyle = "#00FF00";
+                    context.fillStyle = "#0F0";
                 }
             } else {
-                context.fillStyle = "#FFFFFF";
+                context.fillStyle = "#FFF";
             }
             if (red % 2 === 0) {
                 drawHexagon(
