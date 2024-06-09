@@ -1,14 +1,13 @@
 let mini = [];
 let otvoreno = [];
-
+let crosshairBlue = tryToLoad("crosshairBlue","blue")
 function writeText(font, style, text, x, y) {
     context.font = font
     context.fillStyle = style
     context.fillText(text, x, y)
 }
 function vutreLiUPoletoSym(kol,red) {
-    if(kol < 0 || kol > 9 || red < 0 || red > 9) { return false; }
-    return true
+    return !(kol < 0 || kol > 9 || red < 0 || red > 9);
 }
 function broiMiniDoMen(kol,red) {
     // ej shmatka kolenichi kak gi pravi batkoti vyv teradkite zapishi
@@ -55,8 +54,8 @@ function init() {
         mini[i] = [];
         otvoreno[i] = [];
         for (let j = 0; j < 10; j++) {
-            mini[i][j] = randomInteger(2);
-            otvoreno[i][j] = false;
+            mini[i][j] = randomInteger(1.4);
+            otvoreno[i][j] = 0;
         }
     }
 }
@@ -65,15 +64,17 @@ function update() {
 function draw() {
     context.fillStyle = "black";
     context.fillRect(0, 0, 800, 600);
-    context.fillStyle = "green";
+    //context.fillStyle = "green";
     for (let kolona = 0; kolona < 10; kolona++) {
         for (let red = 0; red < 10; red++) {
-            if (otvoreno[kolona][red]) {
+            if (otvoreno[kolona][red]===1) {
                 if (mini[kolona][red]) {
                     context.fillStyle = "#F00";
                 } else {
                     context.fillStyle = "#0F0";
                 }
+            } else if(otvoreno[kolona][red]===0) {
+                context.fillStyle = "#FFF";
             } else {
                 context.fillStyle = "#FFF";
             }
@@ -96,12 +97,17 @@ function draw() {
                     29
                 );
             }
-            if(otvoreno[kolona][red]) {
+            if(otvoreno[kolona][red]===1) {
                 if (mini[kolona][red]) {
                     writeText("12px Tahoma", "Black", "BOMBA", hexX - 18, hexY - 5)
                 } else {
                     writeText("30px Tahoma", "Black", broiMiniDoMen(kolona, red), hexX - 10, hexY - 10)
                 }
+            }else if(otvoreno[kolona][red]===2){
+                let hexX, hexY;
+                let visochina = Math.cos(Math.PI / 6);
+                if(red%2===0) {hexX = 100 + kolona * visochina * 30 * 2; hexY = 100 + red * 30 * 1.5;}else{hexX = 100 + kolona * visochina * 30 * 2 + Math.cos(Math.PI / 6) * 30; hexY = 100 + red * 30 * 1.5}
+                drawImage(crosshairBlue,hexX-10,hexY-10,20,20)
             }
         }
     }
@@ -123,31 +129,36 @@ function mouseup() {
             let dist = Math.sqrt((mouseY - centurY) * (mouseY - centurY) +
                 (mouseX - centurX) * (mouseX - centurX));
             if (dist < Math.cos(Math.PI / 6) * 30 && red % 2 === 0) {
-                otvoreno[kolona][red] = true;
-                otvoreno[kolona + 1][red] = true;
-                otvoreno[kolona - 1][red] = true;
-                otvoreno[kolona][red + 1] = true;
-                otvoreno[kolona][red - 1] = true;
-                otvoreno[kolona ][red + 1] = true;
-                otvoreno[kolona][red - 1] = true;
-                otvoreno[kolona - 1][red + 1] = true;
-                otvoreno[kolona - 1][red - 1] = true;
-
-
+                otvoreno[kolona][red] = 1;
             }
             if (dist < Math.cos(Math.PI / 6) * 30 && red % 2 === 1) {
-                otvoreno[kolona][red] = true;
-                otvoreno[kolona + 1][red] = true;
-                otvoreno[kolona - 1][red] = true;
-                otvoreno[kolona + 1][red + 1] = true;
-                otvoreno[kolona + 1][red - 1] = true;
-                otvoreno[kolona][red + 1] = true;
-                otvoreno[kolona][red - 1] = true;
+                otvoreno[kolona][red] = 1;
             }
         }
     }
 }
 function keyup(key) {
     // Pechatai koda na natisnatiq klavish
-    console.log("Pressed", key);
+    if(key === 32) {
+        for (let red = 0; red < 10; red++) {
+            for (let kolona = 0; kolona < 10; kolona++) {
+                let centurX;
+                let centurY = 100 + red * 30 * 1.5;
+                if (red % 2 === 1) {
+                    centurX = 100 + kolona * (Math.cos(Math.PI / 6)) * 30 * 2 + Math.cos(Math.PI / 6) * 30;
+                } else {
+                    centurX = 100 + kolona * (Math.cos(Math.PI / 6)) * 30 * 2;
+                }
+                let dist = Math.sqrt((mouseY - centurY) * (mouseY - centurY) +
+                    (mouseX - centurX) * (mouseX - centurX));
+                if (dist < Math.cos(Math.PI / 6) * 30 && red % 2 === 0) {
+                    otvoreno[kolona][red] = 2;
+                }
+                if (dist < Math.cos(Math.PI / 6) * 30 && red % 2 === 1) {
+                    otvoreno[kolona][red] = 2;
+                }
+            }
+        }
+    }
 }
+
