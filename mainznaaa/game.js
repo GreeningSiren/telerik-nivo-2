@@ -14,12 +14,22 @@ function broiMiniDoMen(kol,red) {
     // ej shmatka kolenichi kak gi pravi batkoti vyv teradkite zapishi
     let broi = 0;
     // if(vutreLiUPoletoSym(kol,red) && mini[kol][red]) { broi++; }
-    if(vutreLiUPoletoSym(kol+1,red) && mini[kol+1][red]) { broi++; } //              Надясно | Същ ред
-    if(vutreLiUPoletoSym(kol-1,red) && mini[kol-1][red]) { broi++; } //               Наляво | Същ ред
-    if(vutreLiUPoletoSym(kol,red+1) && mini[kol][red+1]) { broi++; } //            На никъде | Нагоре
-    if(vutreLiUPoletoSym(kol,red-1) && mini[kol][red-1]) { broi++; } //            На никъде | Надолу
-    if(vutreLiUPoletoSym(kol+1,red+1) && mini[kol+1][red+1]) { broi++; } //      Надясно | Нагоре
-    if(vutreLiUPoletoSym(kol+1,red-1) && mini[kol+1][red-1]) { broi++; } //      Надясно | Надолу
+    if(red % 2 !== 0) {
+        if (vutreLiUPoletoSym(kol + 1, red) && mini[kol + 1][red]) {broi++;} //               Надясно | Същ ред
+        if (vutreLiUPoletoSym(kol - 1, red) && mini[kol - 1][red]) {broi++;} //                Наляво | Същ ред
+        if (vutreLiUPoletoSym(kol, red + 1) && mini[kol][red + 1]) {broi++;} //             На никъде | Нагоре
+        if (vutreLiUPoletoSym(kol, red - 1) && mini[kol][red - 1]) {broi++;} //             На никъде | Надолу
+        if (vutreLiUPoletoSym(kol + 1, red + 1) && mini[kol + 1][red + 1]) {broi++;} //   Надясно | Нагоре
+        if (vutreLiUPoletoSym(kol + 1, red - 1) && mini[kol + 1][red - 1]) {broi++;} //   Надясно | Надолу
+    }else {
+        if (vutreLiUPoletoSym(kol + 1, red) && mini[kol + 1][red]) {broi++;} //               Надясно | Същ ред
+        if (vutreLiUPoletoSym(kol - 1, red) && mini[kol - 1][red]) {broi++;} //                Наляво | Същ ред
+        if (vutreLiUPoletoSym(kol, red + 1) && mini[kol][red + 1]) {broi++;} //             На никъде | Нагоре
+        if (vutreLiUPoletoSym(kol, red - 1) && mini[kol][red - 1]) {broi++;} //             На никъде | Надолу
+        if (vutreLiUPoletoSym(kol - 1, red + 1) && mini[kol - 1][red + 1]) {broi++;} //   Наляво  | Нагоре
+        if (vutreLiUPoletoSym(kol - 1, red - 1) && mini[kol - 1][red - 1]) {broi++;} //   Наляво  | Надолу
+    }
+
     // if(vutreLiUPoletoSym(kol-1,red+1) && mini[kol-1][red+1]) { broi++; }
     // if(vutreLiUPoletoSym(kol-1,red-1) && mini[kol-1][red-1]) { broi++; }
     return broi;
@@ -77,7 +87,6 @@ function draw() {
                     hexY,
                     29
                 );
-                writeText("30px Tahoma", "Black",broiMiniDoMen(kolona, red),hexX-10,hexY-10)
             } else {
                 hexX = 100 + kolona * visochina * 30 * 2 + Math.cos(Math.PI / 6) * 30
                 hexY = 100 + red * 30 * 1.5
@@ -86,7 +95,13 @@ function draw() {
                     hexY,
                     29
                 );
-                writeText("30px Tahoma", "Black", broiMiniDoMen(kolona,red), hexX-10, hexY-10)
+            }
+            if(otvoreno[kolona][red]) {
+                if (mini[kolona][red]) {
+                    writeText("12px Tahoma", "Black", "BOMBA", hexX - 18, hexY - 5)
+                } else {
+                    writeText("30px Tahoma", "Black", broiMiniDoMen(kolona, red), hexX - 10, hexY - 10)
+                }
             }
         }
     }
