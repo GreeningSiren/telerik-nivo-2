@@ -1,6 +1,29 @@
 let mini = [];
 let otvoreno = [];
 
+function writeText(font, style, text, x, y) {
+    context.font = font
+    context.fillStyle = style
+    context.fillText(text, x, y)
+}
+function vutreLiUPoletoSym(kol,red) {
+    if(kol < 0 || kol > 9 || red < 0 || red > 9) { return false; }
+    return true
+}
+function broiMiniDoMen(kol,red) {
+    // ej shmatka kolenichi kak gi pravi batkoti vyv teradkite zapishi
+    let broi = 0;
+    // if(vutreLiUPoletoSym(kol,red) && mini[kol][red]) { broi++; }
+    if(vutreLiUPoletoSym(kol+1,red) && mini[kol+1][red]) { broi++; } //              Надясно | Същ ред
+    if(vutreLiUPoletoSym(kol-1,red) && mini[kol-1][red]) { broi++; } //               Наляво | Същ ред
+    if(vutreLiUPoletoSym(kol,red+1) && mini[kol][red+1]) { broi++; } //            На никъде | Нагоре
+    if(vutreLiUPoletoSym(kol,red-1) && mini[kol][red-1]) { broi++; } //            На никъде | Надолу
+    if(vutreLiUPoletoSym(kol+1,red+1) && mini[kol+1][red+1]) { broi++; } //      Надясно | Нагоре
+    if(vutreLiUPoletoSym(kol+1,red-1) && mini[kol+1][red-1]) { broi++; } //      Надясно | Надолу
+    // if(vutreLiUPoletoSym(kol-1,red+1) && mini[kol-1][red+1]) { broi++; }
+    // if(vutreLiUPoletoSym(kol-1,red-1) && mini[kol-1][red-1]) { broi++; }
+    return broi;
+}
 function drawHexagon(x, y, radius) {
     context.moveTo(
         Math.cos(Math.PI / 6),
@@ -44,18 +67,26 @@ function draw() {
             } else {
                 context.fillStyle = "#FFF";
             }
+            let hexX,hexY;
+            let visochina = Math.cos(Math.PI / 6);
             if (red % 2 === 0) {
+                hexX = 100 + kolona * visochina * 30 * 2;
+                hexY = 100 + red * 30 * 1.5;
                 drawHexagon(
-                    100 + kolona * (Math.cos(Math.PI / 6)) * 30 * 2,
-                    100 + red * 30 * 1.5,
+                    hexX,
+                    hexY,
                     29
                 );
+                writeText("30px Tahoma", "Black",broiMiniDoMen(kolona, red),hexX-10,hexY-10)
             } else {
+                hexX = 100 + kolona * visochina * 30 * 2 + Math.cos(Math.PI / 6) * 30
+                hexY = 100 + red * 30 * 1.5
                 drawHexagon(
-                    100 + kolona * (Math.cos(Math.PI / 6)) * 30 * 2 + Math.cos(Math.PI / 6) * 30,
-                    100 + red * 30 * 1.5,
+                    hexX,
+                    hexY,
                     29
                 );
+                writeText("30px Tahoma", "Black", broiMiniDoMen(kolona,red), hexX-10, hexY-10)
             }
         }
     }
