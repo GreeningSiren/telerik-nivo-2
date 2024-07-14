@@ -38,7 +38,7 @@ function update() {
         myY = 0 + radius / 2 + 10;
     }
     for (let iv = 0; iv < 5; iv++) {
-        let dist = Math.hypot(myX - vragx[iv],myY - vragy[iv]) 
+        let dist = Math.hypot(myX - vragx[iv],myY - vragy[iv])
         vragx[iv] = vragx[iv] + (myX - vragx[iv]) / dist
         vragy[iv] = vragy[iv] + (myY - vragy[iv]) / dist
         for (let i = 0; i < br; i++) {

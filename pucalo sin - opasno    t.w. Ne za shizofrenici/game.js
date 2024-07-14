@@ -6,7 +6,7 @@ function init() {
     myY = 300;
     ugulche = 0
     radius = 20
-    // Σ = 69 
+    // Σ = 69
     // π = 3.1415926
     Σradius = 40
     pX = []
@@ -57,12 +57,12 @@ function draw() {
     context.beginPath()
     context.moveTo(myX,myY)
     context.lineTo(myX + Σradius*Math.cos(ugulche),myY + Σradius*Math.sin(ugulche))
-    context.stroke() 
+    context.stroke()
     context.closePath()
 
     context.fillStyle = "white"
     context.beginPath()
-    context.arc(myX,myY,radius,0,2* Math.PI) 
+    context.arc(myX,myY,radius,0,2* Math.PI)
     context.fill()
     context.closePath()
     for(let i = 0; i<brPatron;i++) {

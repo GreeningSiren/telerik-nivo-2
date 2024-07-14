@@ -13,7 +13,7 @@ function init() {
     myX = 300;
     myY = 300;
     pixel = []
-    // pixel[0] = "Red" 
+    // pixel[0] = "Red"
     resuvamLi = false
     for (let x = 0; x < 600 / RIZZMER; x++) {
         pixel[x] = []
@@ -54,7 +54,6 @@ function update() {
                     // console.log("slei")
                 }
             }
-    
         }
     }
 
@@ -99,9 +98,6 @@ function draw() {
     context.fillText("LAIN MODe" , 647,500)
     context.font = "30px Tahoma"
     context.fillText("Eraser" , 647,550)
- 
-    
-  
 
 }
 function mouseup() {
@@ -136,7 +132,7 @@ function mouseup() {
     }
     let dx = mouseX - centurX
     let dy = mouseY - centurY
-    let dL = Math.sqrt(dx*dx + dy*dy) 
+    let dL = Math.sqrt(dx*dx + dy*dy)
     let otmestXza1 = dx/dL
     let otmestYza1 = dy/dL
     if(drawMode == "line") {

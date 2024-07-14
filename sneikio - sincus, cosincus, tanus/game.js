@@ -60,7 +60,7 @@ function update() {
         appleY = randomInteger(600-50)
         brPokaji+=10
     // }
-    }   
+    }
 }
 function draw() {
     // Tuk naprogramirai kakvo da se risuva
@@ -78,7 +78,6 @@ function draw() {
     context.fillText(ugulche,0,0)
 
     drawImage(cherry,appleX,appleY,50,50)
-    
 }
 function mouseup() {
     // Pri klik s lqv buton - pokaji koordinatite na mishkata

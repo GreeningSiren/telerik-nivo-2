@@ -85,7 +85,7 @@ function init() {
 	vragX = [];
 	vragY = [];
 	updeit = 0
-	// BFS_Step() 
+	// BFS_Step()
 	// Напълва растояниеДо с числа :) //
 	while (granichniKoloni.length > 0) {
 		BFS_Step();
