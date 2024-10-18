@@ -1,4 +1,18 @@
+function preloadTextures() {
+    let brLk = 7
+    drawImage(box, -1000, -1000, 10,10)
+    drawImage(fireinthehole, -1000, -1000, 10,10)
+    drawImage(powerupBlue, -1000, -1000, 10,10)
+    drawImage(moveTrigger, -1000, -1000, 10,10)
+    drawImage(negacoin, -1000, -1000, 10,10)
+    drawImage(jelly[4], -1000, -1000, 10,10)
+    for(let i = 0; i < brLk; i++) {
+        drawImage(loading[lk], -1000, -1000, 10,10)
+    }
+    drawImage(femaleAction[1], -1000, -1000, 10,10)
+    drawImage(femaleAction[2], -1000, -1000, 10,10)
 
+}
 function resetboxes() {
     dX = 0
     for (let i = 0; i < 15; i++) {

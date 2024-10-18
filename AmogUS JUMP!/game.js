@@ -155,6 +155,7 @@ function draw() {
     // drawImage(backField, 0, 0, 800, 600);
     // drawImage(box,0,600,800,1)
     if (level == 0) {
+        preloadTextures();
         context.font = "30px Tahoma"
         context.fillStyle = "White"
         context.fillText("Kolito Predstavq", 70, 120)
