@@ -162,7 +162,7 @@ function draw() {
         context.font = "70px Comic Sans"
         context.fillStyle = "Red"
         context.fillText("AmogUS JUMP!", 50, 230)
-        drawImage(jelly[4], 310, 600 - 10, 100, 10)
+        drawImage(powerupGreen, 310, 600 - 10, 100, 10)
         drawImage(pngegg, 590, 20, 170, 150)
         context.font = "27px Tahoma"
         context.fillStyle = "Gray"

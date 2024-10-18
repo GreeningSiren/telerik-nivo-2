@@ -5,7 +5,7 @@ function preloadTextures() {
     drawImage(powerupBlue, -1000, -1000, 10,10)
     drawImage(moveTrigger, -1000, -1000, 10,10)
     drawImage(negacoin, -1000, -1000, 10,10)
-    drawImage(jelly[4], -1000, -1000, 10,10)
+    drawImage(powerupGreen, -1000, -1000, 10,10)
     for(let i = 0; i < brLk; i++) {
         drawImage(loading[lk], -1000, -1000, 10,10)
     }
